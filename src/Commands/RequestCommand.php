@@ -2,6 +2,9 @@
 
 namespace Spider\Commands;
 
+use Hyperf\Command\Annotation\Command;
+
+#[Command]
 class RequestCommand extends GeneratorCommand
 {
     public function __construct()
