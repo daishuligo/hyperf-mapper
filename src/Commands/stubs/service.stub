@@ -1,0 +1,16 @@
+<?php
+
+namespace %NAMESPACE%;
+
+use Hyperf\Di\Annotation\Inject;
+use Spider\SpiderService;
+%MAPPER_USERS%
+
+class RoleService extends AbstractService
+{
+    /**
+     * @var %MAPPER%
+     */
+    #[Inject(%MAPPER%::class)]
+    public $mapper;
+}

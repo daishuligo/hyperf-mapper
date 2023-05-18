@@ -1,0 +1,19 @@
+<?php
+
+namespace %NAMESPACE%;
+
+use Spider\SpiderMapper;
+%MODEL_USES%
+
+class %CLASS% extends AbstractMapper
+{
+    /**
+     * @var %MODEL%
+     */
+    public $model;
+
+    public function assignModel()
+    {
+        $this->model = %MODEL%::class;
+    }
+}

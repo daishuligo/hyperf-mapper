@@ -1,0 +1,14 @@
+<?php
+
+namespace %NAMESPACE%;
+
+use Spider\SpiderFormRequest;
+
+class %CLASS% extends SpiderFormRequest
+{
+    public function attributes(): array
+    {
+        return [
+        ];
+    }
+}

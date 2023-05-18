@@ -1,0 +1,59 @@
+<?php
+
+declare(strict_types=1);
+
+namespace %NAMESPACE%;
+
+use Hyperf\Di\Annotation\Inject;
+use Spider\SpiderController;
+%SERVICE_USES%
+%REQUEST_USES%
+
+class %CLASS% extends SpiderController
+{
+    #[Inject]
+    protected %SERVICE% $service;
+
+    #[GetMapping("")]
+    public function index()
+    {
+        $params = $this->request->all();
+        $pageList = $this->service->getPageList($params);
+
+        return $this->success($pageList);
+    }
+
+    #[PostMapping("")]
+    public function save(%REQUEST% $request)
+    {
+        $params = $request->only([]);
+        $this->service->save($params);
+
+        return $this->success();
+    }
+
+    #[GetMapping("{id}")]
+    public function read($id)
+    {
+        $data = $this->service->read($id);
+
+        return $this->success($data);
+    }
+
+    #[PutMapping("{id}")]
+    public function update(MenuRequest $request, $id)
+    {
+        $params = $request->only([]);
+        $this->service->update($id, $params);
+
+        return $this->success();
+    }
+
+    #[DeleteMapping("{id}")]
+    public function delete($id)
+    {
+        $this->service->delete($id);
+
+        return $this->success();
+    }
+}
