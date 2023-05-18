@@ -20,6 +20,9 @@
       "Spider\\": "src/"
     }
   },
+  "config": {
+    "sort-packages": true
+  },
   "extra": {
     "hyperf": {
       "config": "Spider\\ConfigProvider"

@@ -5,6 +5,7 @@ namespace Spider\Commands;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Contract\ConfigInterface;
 
+
 #[Command]
 class MapperCommand extends GeneratorCommand
 {
@@ -29,7 +30,7 @@ class MapperCommand extends GeneratorCommand
 
     protected function replaceModel(string &$stub)
     {
-        $modelName = $this->input->getOption('model') ?? $this->getNameInput();
+        $modelName = $this->input->getOption('entity') ?? $this->getNameInput();
         $uses = $this->getModelNamespace() . '\\' . $modelName;
         $stub = str_replace(
             ['%MODEL%', '%MODEL_USES%'],
@@ -52,7 +53,7 @@ class MapperCommand extends GeneratorCommand
 
     protected function getModelNamespace(): string
     {
-        return $this->getContainer()->get(ConfigInterface::class)->get('spider.generator.mapper')['namespace'] ?? 'App\\Model';
+        return $this->getContainer()->get(ConfigInterface::class)->get('spider.generator.model')['namespace'] ?? 'App\\Model';
     }
 
     protected function getSuffix(): string

@@ -2,8 +2,8 @@
 
 namespace Spider\Commands;
 
-use Hyperf\Command\Annotation\Command;
 use Hyperf\Contract\ConfigInterface;
+use Hyperf\Command\Annotation\Command;
 
 #[Command]
 class ControllerCommand extends GeneratorCommand

@@ -3,9 +3,9 @@
 namespace %NAMESPACE%;
 
 use Spider\SpiderMapper;
-%MODEL_USES%
+use %MODEL_USES%;
 
-class %CLASS% extends AbstractMapper
+class %CLASS% extends SpiderMapper
 {
     /**
      * @var %MODEL%

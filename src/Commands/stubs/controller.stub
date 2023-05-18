@@ -6,11 +6,20 @@ namespace %NAMESPACE%;
 
 use Hyperf\Di\Annotation\Inject;
 use Spider\SpiderController;
-%SERVICE_USES%
-%REQUEST_USES%
+use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Annotation\GetMapping;
+use Hyperf\HttpServer\Annotation\PostMapping;
+use Hyperf\HttpServer\Annotation\PutMapping;
+use Hyperf\HttpServer\Annotation\DeleteMapping;
+use %SERVICE_USES%;
+use %REQUEST_USES%;
 
+#[Controller("/%CLASS%")]
 class %CLASS% extends SpiderController
 {
+    /**
+     * @var %SERVICE%
+     */
     #[Inject]
     protected %SERVICE% $service;
 
@@ -41,7 +50,7 @@ class %CLASS% extends SpiderController
     }
 
     #[PutMapping("{id}")]
-    public function update(MenuRequest $request, $id)
+    public function update(%REQUEST% $request, $id)
     {
         $params = $request->only([]);
         $this->service->update($id, $params);

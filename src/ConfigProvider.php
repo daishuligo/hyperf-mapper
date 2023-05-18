@@ -11,6 +11,16 @@ class ConfigProvider
     public function __invoke()
     {
         return [
+            'annotations' => [
+                'scan' => [
+                    'paths' => [
+                        __DIR__,
+                    ],
+                ],
+            ],
+            'commands' => [
+                ...$this->getDatabaseCommands(),
+            ],
             'publish' => [
                 [
                     'id' => 'config',
@@ -20,5 +30,14 @@ class ConfigProvider
                 ],
             ],
         ];
+    }
+
+    private function getDatabaseCommands(): array
+    {
+        if (! class_exists(CommandCollector::class)) {
+            return [];
+        }
+
+        return CommandCollector::getAllCommands();
     }
 }

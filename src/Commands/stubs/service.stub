@@ -4,9 +4,9 @@ namespace %NAMESPACE%;
 
 use Hyperf\Di\Annotation\Inject;
 use Spider\SpiderService;
-%MAPPER_USERS%
+use %MAPPER_USES%;
 
-class RoleService extends AbstractService
+class %CLASS% extends SpiderService
 {
     /**
      * @var %MAPPER%
