@@ -1,5 +1,5 @@
 {
-  "name": "hyperf/mapper",
+  "name": "spider/hyperf-mapper",
   "description": "Hyperf Database Mapper Component for Hyperf",
   "license": "MIT",
   "keywords": [
