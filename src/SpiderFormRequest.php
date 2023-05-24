@@ -5,6 +5,7 @@ namespace Spider;
 use Hyperf\Collection\Arr;
 use Hyperf\HttpServer\Router\Dispatched;
 use Hyperf\Validation\Request\FormRequest;
+use Spider\Util\SpiderUtil;
 
 abstract class SpiderFormRequest extends FormRequest
 {
@@ -35,5 +36,10 @@ abstract class SpiderFormRequest extends FormRequest
     {
         $controllerMethod = $this->getAttribute(Dispatched::class)->handler->callback;
         return $controllerMethod[1] ?? '';
+    }
+
+    protected function getLanguage(): ?string
+    {
+        return SpiderUtil::getLanguage();
     }
 }

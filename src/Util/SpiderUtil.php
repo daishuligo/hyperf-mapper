@@ -14,11 +14,15 @@ class SpiderUtil
         return ApplicationContext::getContainer();
     }
 
-    public static function trans(string $key, $replace = []): string
+    public static function getLanguage(): ?string
     {
         $acceptLanguage = self::container()->get(SpiderRequest::class)->getHeaderLine('accept-language');
-        $language = !empty($acceptLanguage) ? explode(',', $acceptLanguage)[0] : 'zh_CN';
-        return trans($key, $replace, $language);
+        return !empty($acceptLanguage) ? explode(',', $acceptLanguage)[0] : 'zh_CN';
+    }
+
+    public static function trans(string $key, $replace = []): string
+    {
+        return trans($key, $replace, self::getLanguage());
     }
 
     public static function console()

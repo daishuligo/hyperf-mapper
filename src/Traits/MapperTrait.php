@@ -30,6 +30,13 @@ trait MapperTrait
         return $this->setPaginate($paginate);
     }
 
+    public function getTreeList(?array $params = null, string $id = 'id', string $parentField = 'parent_id',
+                                string $children='children'): array
+    {
+        $data = $this->listQuerySetting($params)->get()->toArray();
+        return $this->toTree($data, $data[0]->{$parentField} ?? 0, $id, $parentField, $children);
+    }
+
     /**
      * 设置查询条件
      * @param array|null $params
@@ -96,11 +103,6 @@ trait MapperTrait
      */
     public function handleOrder(Builder $query, ?array &$params = null): Builder
     {
-        // 对树型数据强行加个排序
-        if (isset($params['_spider_tree'])) {
-            $query->orderBy($params['_spider_tree_pid']);
-        }
-
         if ($params['order_by'] ?? false) {
             if (is_array($params['order_by'])) {
                 foreach ($params['order_by'] as $key => $order) {
@@ -205,5 +207,25 @@ trait MapperTrait
             unset($data[$model->getKeyName()]);
         }
         $model = null;
+    }
+
+    protected function toTree(array $data = [], int $parentId = 0, string $id = 'id', string $parentField = 'parent_id', string $children='children'): array
+    {
+        if (empty($data)) return [];
+
+        $tree = [];
+
+        foreach ($data as $value) {
+            if ($value[$parentField] == $parentId) {
+                $child = $this->toTree($data, $value[$id], $id, $parentField, $children);
+                if (!empty($child)) {
+                    $value[$children] = $child;
+                }
+                array_push($tree, $value);
+            }
+        }
+
+        unset($data);
+        return $tree;
     }
 }
